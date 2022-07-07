@@ -168,37 +168,39 @@ function autoplay(){
       return a.y - b.y;
     });
     
-    console.log(connection);
+    //console.log(connection);
     console.log(rconnection);
     //using the connection array, calculate the available loops within the connection
+    
+    return connection;
+  }
+
+  function find_loops(connection){
     let available_loops = [];
     let l=0; //l is the index for available_loops
     let m=0; //m is the index for inner array
+    let count=0; //count is the number of loops
     //available loop is a 2d array with the row as how many loops and the column as the loop
-    
     do{
       available_loops[l] = [];
-      for(let i=0; i<connection.length; i++){
-        if(connection[i].x==connection[i].y){
-          available_loops[l][m] = connection[i].x;
-          m++;
-          available_loops[l][m] = connection[i].y;
-          m=0;
-          l++;
-          //remove the box from the connection array
-          connection.splice(i, 1);
-        }
-        else if(connection[i].x!=connection[i].y){
+      console.log("step0");
+      for(let i=0; i<connection.length; i++){       
           let temp1 = connection[i].x;//1(x)
-          let temp2 = connection[i].y;//7(y)
+          let temp2 = connection[i].y;//5(y)
+          console.log("step1");
           available_loops[l][m] = temp1;
           m++;
           available_loops[l][m] = temp2;
           m++;
-          connection.splice(i, 1);  
-          do{
+          connection.splice(i, 1); 
+          console.log("step2");
+          count++; 
+          while(temp1 != temp2){//problem here
+            console.log("step3");
             for (let j=0; j<connection.length; j++){
+              console.log("step4");
               if(connection[j].x==temp2){
+                console.log("step5");
                 temp1 = connection[j].x;
                 temp2 = connection[j].y;
                 available_loops[l][m] = temp1;
@@ -206,15 +208,14 @@ function autoplay(){
                 available_loops[l][m] = temp2;
                 m++;
                 connection.splice(j, 1);
+                count++;
               }
             }
-          }while(temp1!=temp2);
+          }
           m=0;
           l++;
-        }
       }
     }while(connection.length>0);
-    console.log(available_loops);
     return available_loops;
   }
 
@@ -228,4 +229,6 @@ function autoplay(){
   show_loop.addEventListener("click", function(){
     let loops = calculate_available_loops();
     console.log(loops);
+    let floops = find_loops(loops);
+    console.log(floops);
   });
