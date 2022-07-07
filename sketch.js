@@ -151,13 +151,13 @@ function autoplay(){
   function calculate_available_loops(){
     let connection = [];
     for(let i=0; i<box.length; i++){
-      connection.push([]);
+      connection.push({x:null, y:null});
     }
     for(let i=0; i<box.length; i++){
       for(let j=0; j<value_inside_box.length; j++){
-        if(box[i]==value_inside_box[j]){
-          connection[i].push(box[i]);
-          connection[i].push(j+1);
+        if(box[i]==(j+1)){
+          connection[i].x = box[i];
+          connection[i].y = value_inside_box[j];
         }
       }
     }
@@ -165,15 +165,13 @@ function autoplay(){
     //using the connection array, calculate the available loops within the connection
     let available_loops = [];
     //available loop is a 2d array with the row as how many loops and the column as the loop
-    if(connection[0][0]==connection[0][1]){
-
-    }
-    do{
-
-    }while(i!=j)
     
+    do{
+      //something
+      //splice the connection array
+    }while(connection.length>0);
 
-    return available_loops;
+    return connection;
   }
 
   //add event listener to autoplay button
