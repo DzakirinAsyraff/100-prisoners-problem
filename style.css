@@ -3,18 +3,25 @@ html, body {
   padding: 0;
 }
 
-canvas {
+/* canvas {
   display: block;
+} */
+
+.mid-container {
+  display: flex;
 }
 
 .box-container {
+  flex: 0 0 65%;
   padding-left: 5rem;
   padding-right: 5rem;
-  margin-left: 15rem;
-  margin-right: 15rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 0.5rem;
+  float: left;
   
 }
 
@@ -29,9 +36,27 @@ canvas {
   text-align: center;
 }
 
-/*
+.iterate-container {
+  flex: 1;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  height: 50vh;
+}
+
+
 .active {
   background-color: rgba(255, 149, 0, 0.8);
+  border: 1px dotted rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  width: 10vw;
+  height: 10vh;
+  padding: 0.5vw;
+  font-size: 30px;
+  text-align: center;
+}
+
+.correct {
+  background-color: rgba(0, 255, 0, 0.8);
   border: 1px dotted rgba(0, 0, 0, 0.8);
   border-radius: 10px;
   width: 10vw;
@@ -62,4 +87,3 @@ canvas {
   font-size: 20px;
   text-align: center;
 }
-*/

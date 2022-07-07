@@ -16,15 +16,45 @@
     <div class="container">
       <div class="header">
         <h2>100 Prisoners Problem Simulation</h2>
-        <p>Now it's 40 for simplicity sake</p>
+        <p>Now it's 10 for simplicity sake</p>
       </div>
-      <div class="box-container">
+      <div class="autoplay-container">
+        <div class="mode-container">
+          <input type="radio" class="mode" id="random-mode" name="mode" value="Random">
+          <label for="random-mode">Random</label>
+          <input type="radio" class="mode" id="strategy-mode" name="mode" value="Strategy">
+          <label for="strategy-mode">Strategy</label>
+        </div>
+        <div class="autoplay-button">
+          <button id="autoplay-button" class="autoplay-button">Autoplay</button>
+          <button id="stop-autoplay-button" class="stop-autoplay-button">Stop</button>
+        </div>
+        <div class="autoplay-speed">
+          <p>Speed: <span id="autoplay-speed">1</span>x</p>
+        </div>
+      </div>
+      <div class="mid-container">
+        <div class="box-container">
+        </div>
+        <div class="iterate-container">
+        </div>
       </div>
       <div class="prisoner-container">
         <div class="prisoner">You are now prisoner:</div>
         <div class="prisoner-turn"></div>
+        <div class="game-round"></div>
         <div class="start-button">Start</div>
         <div class="reset-button">Reset</div>
+      </div>
+      <div class="loop-container">
+        <div class="show-hide-container">
+          <input type="checkbox" class="show-hide" id="show-hide" name="show-hide" value="Show">
+          <label for="show-hide">Show</label>
+          <button id="loop-button" class="show-loop">Show Loop</button>
+        </div>
+        <div class="loop-item">
+          Loops
+        </div>
       </div>
     <script src="sketch.js"></script>
   </body>
