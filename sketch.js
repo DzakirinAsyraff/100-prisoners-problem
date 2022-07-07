@@ -166,13 +166,13 @@ function autoplay(){
     let available_loops = [];
     //available loop is a 2d array with the row as how many loops and the column as the loop
     if(connection[0][0]==connection[0][1]){
-      available_loops.push([1,connection[0][0]]);
+
     }
-    else if(connection[0][0]!=connection[0][1]){
-      // for(let i=connection[0][0]; i<connection[0][1]; i++){
-      //   available_loops.push([1,i]);
-      // }
-    }
+    do{
+
+    }while(i!=j)
+    
+
     return available_loops;
   }
 
