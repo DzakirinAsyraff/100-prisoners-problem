@@ -161,13 +161,15 @@ function autoplay(){
         }
       }
     }
-    console.log(connection);
 
     //sort the connection array by y
-    connection.sort(function(a, b){
+    let rconnection = [...connection];
+    rconnection.sort(function(a, b){
       return a.y - b.y;
     });
+    
     console.log(connection);
+    console.log(rconnection);
     //using the connection array, calculate the available loops within the connection
     let available_loops = [[]];
     let l=0; //l is the index for available_loops
