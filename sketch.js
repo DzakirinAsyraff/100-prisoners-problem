@@ -171,47 +171,51 @@ function autoplay(){
     console.log(connection);
     console.log(rconnection);
     //using the connection array, calculate the available loops within the connection
-    let available_loops = [[]];
+    let available_loops = [];
     let l=0; //l is the index for available_loops
     let m=0; //m is the index for inner array
     //available loop is a 2d array with the row as how many loops and the column as the loop
     
-    // do{
-    //   for(let i=0; i<connection.length; i++){
-    //     if(connection[i].x==connection[i].y){
-    //       available_loops[l][m] = connection[i].x;
-    //       m++;
-    //       available_loops[l][m] = connection[i].y;
-    //       m=0;
-    //       l++;
-    //       //remove the box from the connection array
-    //       connection.splice(i, 1);
-    //     }
-    //     else if(connection[i].x!=connection[i].y){
-    //       let temp1 = connection[i].x;//1(x)
-    //       let temp2 = connection[i].y;//10(y)  
-    //       do{
-    //         for (let j=0; j<connection.length; j++){
-    //           if(connection[j].y==temp1){
-    //             available_loops[l][m] = temp1; //al = [[1]]
-    //             m++;
-    //             available_loops[l][m] = temp2; //al = [[1,10]]
-    //             m++;
-    //             available_loops[l][m] = connection[j].x; //al = [[1,10,4]]
-    //             m++;
-    //             available_loops[l][m] = connection[j].y; //al = [[1,10,4,1]]
-    //             m=available_loops[l].length/2;
-    //             if(temp2!=connection[j].x){
-    //               //
-    //             }
-    //           }
-    //         }
-    //       }while(temp1!=temp2);
-    //     }
-    // }
-    // }while(connection.length>0);
-
-    return connection;
+    do{
+      available_loops[l] = [];
+      for(let i=0; i<connection.length; i++){
+        if(connection[i].x==connection[i].y){
+          available_loops[l][m] = connection[i].x;
+          m++;
+          available_loops[l][m] = connection[i].y;
+          m=0;
+          l++;
+          //remove the box from the connection array
+          connection.splice(i, 1);
+        }
+        else if(connection[i].x!=connection[i].y){
+          let temp1 = connection[i].x;//1(x)
+          let temp2 = connection[i].y;//7(y)
+          available_loops[l][m] = temp1;
+          m++;
+          available_loops[l][m] = temp2;
+          m++;
+          connection.splice(i, 1);  
+          do{
+            for (let j=0; j<connection.length; j++){
+              if(connection[j].x==temp2){
+                temp1 = connection[j].x;
+                temp2 = connection[j].y;
+                available_loops[l][m] = temp1;
+                m++;
+                available_loops[l][m] = temp2;
+                m++;
+                connection.splice(j, 1);
+              }
+            }
+          }while(temp1!=temp2);
+          m=0;
+          l++;
+        }
+      }
+    }while(connection.length>0);
+    console.log(available_loops);
+    return available_loops;
   }
 
   //add event listener to autoplay button
