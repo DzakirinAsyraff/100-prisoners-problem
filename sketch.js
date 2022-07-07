@@ -162,14 +162,52 @@ function autoplay(){
       }
     }
     console.log(connection);
+
+    //sort the connection array by y
+    connection.sort(function(a, b){
+      return a.y - b.y;
+    });
+    console.log(connection);
     //using the connection array, calculate the available loops within the connection
-    let available_loops = [];
+    let available_loops = [[]];
+    let l=0; //l is the index for available_loops
+    let m=0; //m is the index for inner array
     //available loop is a 2d array with the row as how many loops and the column as the loop
     
-    do{
-      //something
-      //splice the connection array
-    }while(connection.length>0);
+    // do{
+    //   for(let i=0; i<connection.length; i++){
+    //     if(connection[i].x==connection[i].y){
+    //       available_loops[l][m] = connection[i].x;
+    //       m++;
+    //       available_loops[l][m] = connection[i].y;
+    //       m=0;
+    //       l++;
+    //       //remove the box from the connection array
+    //       connection.splice(i, 1);
+    //     }
+    //     else if(connection[i].x!=connection[i].y){
+    //       let temp1 = connection[i].x;//1(x)
+    //       let temp2 = connection[i].y;//10(y)  
+    //       do{
+    //         for (let j=0; j<connection.length; j++){
+    //           if(connection[j].y==temp1){
+    //             available_loops[l][m] = temp1; //al = [[1]]
+    //             m++;
+    //             available_loops[l][m] = temp2; //al = [[1,10]]
+    //             m++;
+    //             available_loops[l][m] = connection[j].x; //al = [[1,10,4]]
+    //             m++;
+    //             available_loops[l][m] = connection[j].y; //al = [[1,10,4,1]]
+    //             m=available_loops[l].length/2;
+    //             if(temp2!=connection[j].x){
+    //               //
+    //             }
+    //           }
+    //         }
+    //       }while(temp1!=temp2);
+    //     }
+    // }
+    // }while(connection.length>0);
 
     return connection;
   }
