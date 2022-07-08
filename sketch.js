@@ -206,38 +206,32 @@ function linearSearch(arr, key){
     do{
       available_loops[l] = [];
       console.log("step0");
-      for(let i=0; i<connection.length; i++){
-          let temp1 = connection[i].x;//1(x)
-          let temp2 = connection[i].y;//5(y)
-          console.log("step1");
-          available_loops[l][m] = temp1;
+      for(let i=0; i<connection_copy.length; i++){
+        let temp1 = connection[i].x;//1(x)
+        let temp2 = connection[i].y;//5(y)
+        next = connection[i].y;
+        console.log("step1");
+        available_loops[l][m] = temp1;
+        m++;
+        available_loops[l][m] = temp2;
+        m++;
+        connection_copy.splice(i, 1);
+        console.log("step2");
+        while(temp1 !== next){//problem here
+          let f = linearSearch(box, next);
+          console.log("step3");
+          next = connection[f].y;
+          available_loops[l][m] = next;
           m++;
-          available_loops[l][m] = temp2;
-          m++;
-          connection.splice(i, 1);
-          console.log("step2");
-          count++; 
-          while(temp1 != temp2){//problem here
-            console.log("step3");
-            for (let j=0; j<connection.length; j++){
-          console.log("step4");
-              if(connection[j].x==temp2){
-                console.log("step5");
-                temp1 = connection[j].x;
-                temp2 = connection[j].y;
-                available_loops[l][m] = temp1;
-          m++;
-                available_loops[l][m] = temp2;
-          m++;
-                connection.splice(j, 1);
-                count++;
-        }
-      }
+          connection_copy.splice(f, 1);
+          if(temp1 === next){
+            break;
           }
         }
+      }
       m=0;
       l++;
-    }while(connection.length>0);
+    }while(connection_copy.length>0);
     return available_loops;
   }
 
