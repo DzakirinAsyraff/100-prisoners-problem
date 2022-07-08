@@ -184,6 +184,15 @@ function autoplay(){
 function linearSearch(arr, key){
   for(let i = 0; i < arr.length; i++){
       if(arr[i] === key){
+        return i;
+      }
+  }
+  return -1;
+}
+
+function linearSearchSpecial(arr, key){
+  for(let i = 1; i < arr.length; i++){
+      if(arr[i] === key){
           return i;
       }
   }
@@ -194,7 +203,7 @@ function linearSearch(arr, key){
     let connection_copy = [...connection];
     //to splice and used as while condition
 
-    let available_loops = [[]];
+    let available_loops = [];
     let l=0; //l is the index for connection array
     let m=0; //m is the index for outer array available_loops
     let n=0;
@@ -204,24 +213,24 @@ function linearSearch(arr, key){
     let next;
     //available loop is a 2d array with the row as how many loops and the column as the loop
     do{
-      available_loops[l] = [];
+      // available_loops[l] = [];
       console.log("step0");
-      for(let i=0; i<connection_copy.length; i++){
+      for(let i=0; i<connection.length; i++){
         let temp1 = connection[i].x;//1(x)
         let temp2 = connection[i].y;//5(y)
         next = connection[i].y;
-        console.log("step1");
-        available_loops[l][m] = temp1;
+        console.log("step1",i, next);
+        available_loops[m] = temp1;
         m++;
-        available_loops[l][m] = temp2;
+        available_loops[m] = temp2;
         m++;
         connection_copy.splice(i, 1);
         console.log("step2");
         while(temp1 !== next){//problem here
           let f = linearSearch(box, next);
-          console.log("step3");
+          console.log("step3",f);
           next = connection[f].y;
-          available_loops[l][m] = next;
+          available_loops[m] = next;
           m++;
           connection_copy.splice(f, 1);
           if(temp1 === next){
@@ -232,6 +241,21 @@ function linearSearch(arr, key){
       m=0;
       l++;
     }while(connection_copy.length>0);
+
+    //copy the first loop in the available_loops array to a new array
+    let last = linearSearch(available_loops,1);
+    let loop_copy = [...available_loops];
+
+    let loop_list = [];
+    loop_list = available_loops.slice(0,last);
+    available_loops.splice(0,last);
+
+    console.log(last);
+    console.log(loop_list);
+    console.log(available_loops);
+    console.log(loop_copy);
+
+    
     return available_loops;
   }
 
