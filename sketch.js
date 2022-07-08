@@ -245,15 +245,29 @@ function linearSearchSpecial(arr, key){
     let loop_copy = [...available_loops];
     let loop_list = [];
     //copy the first loop in the available_loops array to a new array
+    let i=0;
     do{
+      let index=0;
       let last = linearSearchSpecial(available_loops,1);
-
-      
+      if(last===-1){
+        break;
+      }
       loop_list = available_loops.slice(0,last+1);
-      available_loops.splice(0,last+1);
-    }while(available_loops.length>0);
+      available_loops.splice(0,loop_list.length);
 
-    console.log(last);
+      //if available_loops includes loop_list, remove it from available_loops
+      for(let j=0; j< loop_list.length; j++){
+        for(let k=0; k<available_loops.length; k++){
+          if(available_loops[k]===loop_list[j]){
+            available_loops.splice(k,1);
+          }
+        }console.log("step4",index);
+      }
+      i++;
+        
+    }while(loop_list.length<20);
+
+    //console.log(last);
     console.log(loop_list);
     console.log(available_loops);
 
