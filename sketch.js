@@ -214,21 +214,21 @@ function linearSearchSpecial(arr, key){
     //available loop is a 2d array with the row as how many loops and the column as the loop
     do{
       // available_loops[l] = [];
-      console.log("step0");
+      
       for(let i=0; i<connection.length; i++){
         let temp1 = connection[i].x;//1(x)
         let temp2 = connection[i].y;//5(y)
         next = connection[i].y;
-        console.log("step1",i, next);
+        
         available_loops[m] = temp1;
         m++;
         available_loops[m] = temp2;
         m++;
         connection_copy.splice(i, 1);
-        console.log("step2");
+        
         while(temp1 !== next){//problem here
           let f = linearSearch(box, next);
-          console.log("step3",f);
+          
           next = connection[f].y;
           available_loops[m] = next;
           m++;
@@ -246,31 +246,50 @@ function linearSearchSpecial(arr, key){
     let loop_list = [];
     //copy the first loop in the available_loops array to a new array
     let i=0;
+    let index=1;
     do{
-      let index=0;
-      let last = linearSearchSpecial(available_loops,1);
-      if(last===-1){
-        break;
-      }
-      loop_list = available_loops.slice(0,last+1);
-      available_loops.splice(0,loop_list.length);
+      
+      let last;
+      do{
+        last = linearSearchSpecial(available_loops,index);
+        
+        if(last===-1){
+          index++;
+          if(index>10){
+            index=0;
+          }
+          
+        }
+      }while(last===-1);
+      
+      let new_loop = available_loops.slice(loop_list.length,last+1);
+      console.log(new_loop);
+      console.log(loop_list.length, last+1);
+      loop_list.push(new_loop);
+      console.log(loop_list);
+      available_loops.splice(0,new_loop.length);
+      console.log(available_loops);
+      
 
       //if available_loops includes loop_list, remove it from available_loops
-      for(let j=0; j< loop_list.length; j++){
+      for(let j=0; j< new_loop.length; j++){
+        
         for(let k=0; k<available_loops.length; k++){
-          if(available_loops[k]===loop_list[j]){
+          
+          if(available_loops[k]===new_loop[j]){
+            
             available_loops.splice(k,1);
           }
-        }console.log("step4",index);
+        }
       }
-      i++;
+      index++;
+      
         
-    }while(loop_list.length<20);
+    }while(loop_list.length<30);
 
     //console.log(last);
     console.log(loop_list);
     console.log(available_loops);
-
     
     return available_loops;
   }
